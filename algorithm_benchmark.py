@@ -24,7 +24,10 @@ def benchmark(argv):
             elif opt in ("-s", "--silent"):
                 silent = True
             elif opt in ("-a", "--algorithm"):
-                algorithm = arg
+                if arg[0]!='-':
+                    algorithm = '-'+arg
+                else:
+                    algorithm = arg
             elif opt in ("-f","--file-size"):
                 filesize = arg
             elif opt in ("-c","--count"):
@@ -47,7 +50,7 @@ def benchmark(argv):
             average=0
             
             if outputfile != None:
-                os.system(f"echo '{algorithm[1:]};id;time'  > {outputfile}")
+                os.system(f"echo '{algorithm[1:]};id;time_[ms]'  > {outputfile}")
             if not silent:
                 print(f"File size: {filesize}")
                 print(f"Count of tests: {count}")
@@ -56,15 +59,15 @@ def benchmark(argv):
                 times = subprocess.Popen([f"time", "openssl", "dgst" ,f"{algorithm}", f"{algorithm[1:]+'_'+filesize}.txt"],stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()
                 user_time = times[0].decode('utf-8').split()[2].replace('user','')
                 sys_time = times[0].decode('utf-8').split()[3].replace('system','')
-                total_time = float(user_time) +float(sys_time);
+                total_time = float(user_time) +float(sys_time)
                 average += total_time
 
                 if outputfile != None:
                     os.system(f"echo ';{i};{str(total_time)};'  >> {outputfile}")
                 if not silent:
-                    print(f"Times: u: {user_time}, \t s: {sys_time}, \t {total_time}")    
+                    print(f"Times: u: {user_time}, \t s: {sys_time}, \t t: {total_time}")    
             
-            os.system(f"rm -f {algorithm[1:]+'_'+filesize}.txt");
+            os.system(f"rm -f {algorithm[1:]+'_'+filesize}.txt")
 
             if not silent:
                 print()
