@@ -19,7 +19,7 @@ def benchmark(argv):
         
         for opt, arg in opts:
             if opt in ("-h","--help"):
-                print('test.py -s <silent> -a <algorithm> -f <filesize> -c <count> -o <outputfile>')
+                print('alghorithm_benchmark.py -s <silent> -a <algorithm> -f <filesize> -c <count> -o <outputfile>')
                 sys.exit()
             elif opt in ("-s", "--silent"):
                 silent = True
@@ -37,7 +37,7 @@ def benchmark(argv):
 
         if algorithm == None or filesize == None or count == None:
             print("Provide sufficient arguments!")
-            print('test.py -s <silent> -a <algorithm> -f <filesize> -c <count> -o <outputfile>')
+            print('alghorithm_benchmark.py -s <silent> -a <algorithm> -f <filesize> -c <count> -o <outputfile>')
             sys.exit(2)
         else:
             if  re.search(r"^0+[A-z]*$", filesize):
