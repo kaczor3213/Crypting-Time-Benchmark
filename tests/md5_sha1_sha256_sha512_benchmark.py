@@ -1,4 +1,4 @@
-from algorithm_benchmark import benchmark
+from ..benchmarks.algorithm_benchmark import benchmark
 from datetime import datetime
 import os
 
