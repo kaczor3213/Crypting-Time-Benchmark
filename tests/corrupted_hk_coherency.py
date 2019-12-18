@@ -1,4 +1,4 @@
-from generate_hk import generate_hk
+from ..tools.generate_hk import generate_hk
 from datetime import datetime
 from random import randint
 import os
